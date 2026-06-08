@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(chainlink-cre-skill)",
+      "Skill(chainlink-cre-skill:*)"
+    ]
+  }
+}

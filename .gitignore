@@ -1,0 +1,13 @@
+.env
+*.env
+node_modules/
+dist/
+*.wasm
+tmp.js
+# CRE compile artifacts
+.cre_build_tmp.js
+.cre/
+# Foundry build artifacts
+out/
+cache/
+broadcast/

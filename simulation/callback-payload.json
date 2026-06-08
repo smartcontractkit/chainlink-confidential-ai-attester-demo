@@ -1,0 +1,37 @@
+{
+  "id": "019ea31f-0563-74ca-8ffe-4452b34385c9",
+  "status": "completed",
+  "model": "gemma4",
+  "system_prompt": "You are a helpful assistant. When documents are provided, base your answers on their content. If the documents do not contain enough information to answer, say so.",
+  "prompt": "Based on the financial documents provided, is this individual a suitable candidate for an undercollateralized DeFi loan of 500,000 USDC?\n\nAnalyze only what is visible in the statement:\n- Sum all credit transactions to estimate monthly income\n- Sum all debit transactions to estimate monthly obligations  \n- Note total liquid assets as a repayment buffer\n- Do not decline to answer due to missing documents — assess on available evidence\nRespond with ONLY a valid JSON object:\n{\n  \"approved\": true,\n  \"confidence\": \"high\",\n  \"reason\": \"one sentence citing specific figures from the statement\",\n  \"estimated_monthly_income_usd\": 312500,\n  \"estimated_monthly_obligations_usd\": 45000,\n  \"liquid_buffer_usd\": 2106990,\n  \"risk_level\": \"low\"\n}",
+  "resource_summaries": [
+    {
+      "filename": "Bank Statement — First Atlantic Bank.pdf",
+      "digest": "32949a93625bf993f9dfce501544e0f1996c744a24fd9b923103a2e081c9157d",
+      "content_type": "application/pdf",
+      "size": 170933,
+      "preprocessed": true
+    }
+  ],
+  "output": "```json\n{\n  \"approved\": true,\n  \"confidence\": \"high\",\n  \"reason\": \"The account holder demonstrates strong financial health, evidenced by a $312,500 estimated monthly income and a closing balance of $2,106,990.\",\n  \"estimated_monthly_income_usd\": 312500,\n  \"estimated_monthly_obligations_usd\": 47820.33,\n  \"liquid_buffer_usd\": 2106990.22,\n  \"risk_level\": \"low\"\n}\n```",
+  "usage": {
+    "prompt_tokens": 1898,
+    "completion_tokens": 1531
+  },
+  "resources": [
+    {
+      "url": "upload://Bank%20Statement%20%E2%80%94%20First%20Atlantic%20Bank.pdf",
+      "digest": "32949a93625bf993f9dfce501544e0f1996c744a24fd9b923103a2e081c9157d",
+      "request_digest": "bff9b4dac33040a996222aa06bb85f240482ec662a87da98590aa70553258e54",
+      "response_digest": "0a0124911560a2236e432d30c3e2a90b0666f4c84b40bf10ba01960595c6ecea",
+      "content_type": "application/pdf",
+      "preprocessed": true,
+      "filename_digest": "c4d832cdc8b2d7d278a27ba07ea33cb63befe493357887ba17660f7f912722d4",
+      "filename_blinding": "76bd8252ac7d1701ec93262d8c99140a"
+    }
+  ],
+  "created_at": "2026-06-07T17:26:19.747317507Z",
+  "started_at": "2026-06-07T17:26:19.747505066Z",
+  "status_at": "2026-06-07T17:31:48.697160326Z",
+  "completed_at": "2026-06-07T17:27:43.94999687Z"
+}

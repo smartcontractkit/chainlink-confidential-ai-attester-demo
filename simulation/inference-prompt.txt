@@ -1,0 +1,24 @@
+Prompt used when calling the private inference API (POST /v1/inference)
+for the "Smart Notary" undercollateralized-loan analysis.
+
+This is the exact `prompt` field carried in simulation/callback-payload.json.
+----------------------------------------------------------------------------
+
+Based on the financial documents provided, is this individual a suitable candidate for an undercollateralized DeFi loan of 500,000 USDC?
+
+Analyze only what is visible in the statement:
+- Sum all credit transactions to estimate monthly income
+- Sum all debit transactions to estimate monthly obligations
+- Note total liquid assets as a repayment buffer
+- Do not decline to answer due to missing documents — assess on available evidence
+
+Respond with ONLY a valid JSON object:
+{
+  "approved": true,
+  "confidence": "high",
+  "reason": "one sentence citing specific figures from the statement",
+  "estimated_monthly_income_usd": 312500,
+  "estimated_monthly_obligations_usd": 45000,
+  "liquid_buffer_usd": 2106990,
+  "risk_level": "low"
+}
