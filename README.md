@@ -151,6 +151,14 @@ Run `simulate` **without** `--http-payload`. With CRE CLI v1.19.0 or above it st
 cre workflow simulate undercollateralized-loan-attestation-workflow --broadcast
 ```
 
+You should see something like:
+
+```bash
+[SIMULATION] Simulator Initialized
+[SIMULATION] Running trigger trigger=http-trigger@1.0.0-alpha
+Waiting for HTTP request to start execution (listening on http://localhost:2000/trigger)...
+```
+
 In a second terminal, expose port 2000 so the remote Attester can reach it:
 
 ```bash
@@ -163,7 +171,7 @@ ngrok http 2000      # → https://<something>.ngrok-free.dev
 Set the Attester base URL and your `cre_callback` URL — the ngrok tunnel from step 3 with the `/trigger` path appended:
 
 ```bash
-export BASE_URL="https://localhost:8888"                              # the Chainlink Confidential AI Attester endpoint
+export BASE_URL="http://localhost:8888"                              # the Chainlink Confidential AI Attester endpoint
 export CRE_CALLBACK_URL="https://<something>.ngrok-free.dev/trigger"  # ngrok URL from step 3 + /trigger
 ```
 
@@ -200,6 +208,19 @@ You should see:
 The Attester runs the inference in its TEE and POSTs the decision to your `cre_callback` URL — the ngrok tunnel to your locally-running `cre workflow simulate` HTTP-trigger server (port 2000). The workflow parses the callback, encodes the decision, and writes it on-chain through `LoanGate.onReport` — all in one seamless flow from the Attester to Ethereum Sepolia.
 
 > Older `cre cli` versions don't serve the trigger locally. Either update the CLI or fallback to scenario 1)
+
+If successful, you should see in the pending `cre workflow simulate` terminal the logs of the workflow execution, including the on-chain write:
+
+```bash
+[USER LOG] Inference callback received: id=019eaded-20f1-7b2d-b2d6-9f52131434e3 status=completed
+[USER LOG] LLM decision: approved=true risk=low confidence=high
+[USER LOG] transcriptHash=0x0a0124911560a2236e432d30c3e2a90b0666f4c84b40bf10ba01960595c6ecea documentDigest=32949a93625bf993f9dfce501544e0f1996c744a24fd9b923103a2e081c9157d
+[USER LOG] On-chain write: txHash=0x804a2639c68aa4ef23f3fc89e0b3b9597683b9f6d02c479ffd3282c9760a8838 error=n/a
+
+✓ Workflow Simulation Result:
+"{\"id\":\"019eaded-20f1-7b2d-b2d6-9f52131434e3\",\"status\":\"completed\",\"borrower\":\"0x0000000000000000000000000000000000000001\",\"approved\":true,\"reason\":\"The individual demonstrates significant financial strength with total monthly credits of $312,500.00 and a liquid buffer exceeding $2.1 million.\",\"riskLevel\":\"low\",\"confidence\":\"high\",\"estimatedMonthlyIncomeUsd\":312500,\"estimatedMonthlyObligationsUsd\":47820.33,\"liquidBufferUsd\":2106990.22,\"transcriptHash\":\"0x0a0124911560a2236e432d30c3e2a90b0666f4c84b40bf10ba01960595c6ecea\",\"documentDigest\":\"32949a93625bf993f9dfce501544e0f1996c744a24fd9b923103a2e081c9157d\",\"consumerAddress\":\"0x21937f68a223D6682f4b40517C6358446890Be1F\",\"chainSelectorName\":\"ethereum-testnet-sepolia\",\"write\":{\"attempted\":false}}"
+```
+
 
 
 ### KeystoneForwarder addresses (Ethereum Sepolia)
