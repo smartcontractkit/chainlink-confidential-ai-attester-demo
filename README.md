@@ -14,7 +14,7 @@ undercollateralized borrowing.
 
 ## Prerequisites
 
-- **CRE CLI** (`cre`) — built and verified with **v1.18.0**.
+- **CRE CLI** (`cre`) — built and verified with **v1.19.0**.
 - **Bun** ≥ 1.2.21 (verified with 1.3.0).
 - **Foundry** (`forge`, `cast`) — to compile, deploy, and query `LoanGate`.
 - A **funded Ethereum Sepolia wallet** — needed for the on-chain steps (`forge create`,
@@ -171,7 +171,7 @@ ngrok http 2000      # → https://<something>.ngrok-free.dev
 Set the Attester base URL and your `cre_callback` URL — the ngrok tunnel from step 3 with the `/trigger` path appended:
 
 ```bash
-export BASE_URL="http://localhost:8888"                              # the Chainlink Confidential AI Attester endpoint
+export BASE_URL="https://confidential-ai-dev-preview.cldev.cloud"     # the Chainlink Confidential AI Attester endpoint
 export CRE_CALLBACK_URL="https://<something>.ngrok-free.dev/trigger"  # ngrok URL from step 3 + /trigger
 ```
 
